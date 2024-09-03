@@ -31,7 +31,7 @@ def create_banner(device_name, level ,filename="banner.bmp", standardColor=True)
 
 
     try:
-        font = ImageFont.truetype("arial.ttf", 12)
+        font = ImageFont.truetype("arial.ttf", 14)
     except IOError:
         print("Benutzerdefinierte Schrift konnte nicht gefunden werden!")
         font = ImageFont.load_default()
@@ -46,7 +46,7 @@ def create_banner(device_name, level ,filename="banner.bmp", standardColor=True)
     draw.text((5, 65), f"Level: {level}", fill=normalColor, font=font)
     draw.line((5, 80, 245, 80), fill=normalColor, width=1)
 
-    draw.text((5, 95), f"Time: {time.strftime("%T")}", fill=normalColor, font=font)
+    draw.text((5, 95), f"Time: {time.strftime('%T')}", fill=normalColor, font=font)
     draw.line((5, 110, 245, 110), fill=normalColor, width=1)
 
     image.save(filename)

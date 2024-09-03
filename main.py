@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect
-from Screen import create_banner
+from Images import create_banner
 from PIL import Image
 import Display
 from threading import Thread
@@ -16,11 +16,11 @@ PossibleNames = [
     "Admin"
 ]
 
-def load_json(filename="config.json"):
+def load_json(filename="brain.json"):
     with open(filename, "r") as file:
         return json.load(file)
 
-def save_json(data, filename="config.json"):
+def save_json(data, filename="brain.json"):
     with open(filename, "w") as file:
         json.dump(data, file, indent=4)
 
@@ -29,7 +29,7 @@ def create_brain():
         "device":  {
             "name": random.choice(PossibleNames),
             "level": 1,
-            "created": time.strftime("%d.%m.%y // %T")
+            "created": time.strftime('%d.%m.%y // %T')
         }
     }
     save_json(data)
