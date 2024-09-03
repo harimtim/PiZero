@@ -61,7 +61,5 @@ def webserver():
 
 if init():
     thread1 = Thread(target=main)
-    thread2 = Thread(target=webserver)
-
     thread1.start()
-    thread2.start()
+    webserver()
