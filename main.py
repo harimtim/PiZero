@@ -46,20 +46,6 @@ def main():
             print(e)
         time.sleep(10)
 
-def webserver():
-    app = Flask(__name__, template_folder="")
-    @app.route("/")
-    def index():
-        if request.method == "GET":
-            return render_template("index.html")
-        else:
-            data = load_json()
-            data["device"]["name"] = request.form["name"]
-            save_json(data)
-            return "Name changed"
-    app.run(debug=True, host="0.0.0.0", port=80)
 
 if init():
-    thread1 = Thread(target=main)
-    thread1.start()
-    webserver()
+    main()
