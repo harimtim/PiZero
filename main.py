@@ -26,10 +26,13 @@ def create_brain():
     save_json(data)
 
 def init():
-    if not os.path.exists("brain.json"):
-        create_brain()
-    print("Initial proccess successfully exited!")
-    main()
+    try:
+        if not os.path.exists("brain.json"):
+            create_brain()
+        print("Initial proccess successfully exited!")
+        return True
+    except:
+        return False
 
 def main():
     while True:
@@ -56,4 +59,9 @@ def webserver():
             return "Name changed"
     app.run(debug=True, host="0.0.0.0", port=80)
 
-webserver()
+if init():
+    thread1 = Thread(target=main)
+    thread2 = Thread(target=webserver)
+
+    thread1.start()
+    thread2.start()
