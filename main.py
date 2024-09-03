@@ -1,20 +1,11 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, request
 from Images import create_banner
 from PIL import Image
 import Display
 from threading import Thread
-import random
 import json
 import time
 import os
-
-PossibleNames = [
-    "marKO",
-    "Irkou", 
-    "Louha",
-    "Ritolar",
-    "Admin"
-]
 
 def load_json(filename="brain.json"):
     with open(filename, "r") as file:
@@ -27,7 +18,7 @@ def save_json(data, filename="brain.json"):
 def create_brain(): 
     data = {
         "device":  {
-            "name": random.choice(PossibleNames),
+            "name": "harimtim",
             "level": 1,
             "created": time.strftime('%d.%m.%y // %T')
         }
@@ -52,4 +43,17 @@ def main():
             print(e)
         time.sleep(10)
 
-init()
+def webserver():
+    app = Flask(__name__, template_folder="")
+    @app.route("/")
+    def index():
+        if request.method == "GET":
+            return render_template("index.html")
+        else:
+            data = load_json()
+            data["device"]["name"] = request.form["name"]
+            save_json(data)
+            return "Name changed"
+    app.run(debug=True, host="0.0.0.0", port=80)
+
+webserver()
