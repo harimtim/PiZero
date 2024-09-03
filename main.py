@@ -1,13 +1,20 @@
 from flask import Flask, render_template, redirect
-from Display import create_banner
+from Screen import create_banner
 from PIL import Image
-import WaveShareV4 as Display
+import Display
 from threading import Thread
-import config
 import random
 import json
 import time
 import os
+
+PossibleNames = [
+    "marKO",
+    "Irkou", 
+    "Louha",
+    "Ritolar",
+    "Admin"
+]
 
 def load_json(filename="config.json"):
     with open(filename, "r") as file:
@@ -20,7 +27,7 @@ def save_json(data, filename="config.json"):
 def create_brain(): 
     data = {
         "device":  {
-            "name": random.choice(config.PossibleNames),
+            "name": random.choice(PossibleNames),
             "level": 1,
             "created": time.strftime("%d.%m.%y // %T")
         }
